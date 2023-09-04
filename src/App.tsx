@@ -40,6 +40,7 @@ function App() {
         Edit <code>App.tsx</code> to <code>123</code> see changes <i>123</i>
       </Trans>
       <p>{t('lol')}</p>
+      <p>{t('TEST')}</p>
     </>
   );
 }

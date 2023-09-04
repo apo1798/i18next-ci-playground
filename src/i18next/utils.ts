@@ -25,39 +25,3 @@ const result = Object.entries(po.translations['']).reduce(
 );
 
 fs.writeFileSync('test.json', JSON.stringify(result));
-
-// import path from 'path';
-// import { readFileSync, writeFileSync } from 'fs';
-// import {
-//   i18nextToPo,
-//   i18nextToPot,
-//   i18nextToMo,
-//   gettextToI18next,
-// } from 'i18next-conv';
-
-// const source = path.join(__dirname, '../../locales/zh-TW/test.po');
-// const options = {
-//   /* you options here */
-// };
-
-// function save(target: string) {
-//   return (result: string) => {
-//     writeFileSync(target, result);
-//   };
-// }
-
-// i18nextToPo('ua-UK', readFileSync(source), options).then(
-//   save('../locales/ua-UK/translation.po')
-// );
-// i18nextToPot('ua-UK', readFileSync(source), options).then(
-//   save('../locales/ua-UK/translation.pot')
-// );
-// i18nextToMo('ua-UK', readFileSync(source), options).then(
-//   save('../locales/ua-UK/translation.mo')
-// );
-
-// gettextToI18next(
-//   'ua-UK',
-//   readFileSync('../locales/ua-UK/translation.po'),
-//   options
-// ).then(save('../locales/ua-UK/translation.json'));

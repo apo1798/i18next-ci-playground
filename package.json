@@ -8,9 +8,13 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "lint:locale": "eslint --fix --ext .json --format node_modules/eslint-plugin-i18n-json/formatter.js translations/"
+    "lint:locale": "eslint --fix --ext .json --format node_modules/eslint-plugin-i18n-json/formatter.js translations/",
+    "test:locale": "node test.js",
+    "test:locale-fail": "node test-fail.js"
   },
   "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
     "@types/gettext-parser": "^4.0.2",
     "gettext-parser": "^7.0.1",
     "i18next": "^23.4.6",
