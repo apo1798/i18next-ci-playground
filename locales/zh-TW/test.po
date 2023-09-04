@@ -1,0 +1,8 @@
+msgid "learn"
+msgstr "學習"
+
+msgid "description"
+msgstr "編輯<1>src/App.js</1>存檔重整"
+
+msgid "lol"
+msgstr "只有中文有XD"
