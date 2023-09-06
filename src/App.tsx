@@ -41,6 +41,7 @@ function App() {
       </Trans>
       <p>{t('lol')}</p>
       <p>{t('TEST')}</p>
+      <p>{t('TEST2')}</p>
     </>
   );
 }

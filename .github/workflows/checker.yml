@@ -39,7 +39,13 @@ jobs:
         run: cat $DIFF
 
       - name: run test.js
-        run: npm run test:locale
+        env:
+          JSON-DIFF: ${{ steps.git-diff-action.outputs.json-diff-path }}
+        run: |
+          echo ${{ steps.git-diff-action.outputs.json-diff-path }} 
+          echo 🍍🍍🍍🍍🍍
+          cat $DIFF
+          npm run test:locale
 
         # steps:
         #   - name: Set the value

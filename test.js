@@ -8,8 +8,11 @@ import { fileURLToPath } from 'url';
 import core from '@actions/core';
 import github from '@actions/github';
 
-console.log(process?.env);
-console.log(process?.env?.diff.json);
+console.log('🍍🍍🍍🍍');
+
+// const result = fs.readFileSync('diff.json', { encoding: 'utf8' });
+// console.log('🍍🍍🍍🍍');
+// console.log(result);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -33,3 +36,5 @@ const I18N = locales.reduce((acc, currentDir) => {
 }, {});
 
 fs.writeFileSync('test.json', JSON.stringify(I18N));
+
+
