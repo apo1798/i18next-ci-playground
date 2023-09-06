@@ -1,25 +1,18 @@
-import gettextParser from 'gettext-parser';
-import fs from 'fs';
 import path from 'path';
-
+import fs from 'fs';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import gettextParser from 'gettext-parser';
 
-import core from '@actions/core';
-import github from '@actions/github';
-
-console.log('🍍🍍🍍🍍');
-
-// const result = fs.readFileSync('diff.json', { encoding: 'utf8' });
-// console.log('🍍🍍🍍🍍');
-// console.log(result);
+import { localesDirPath } from './settings.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const localeDir = path.join(__dirname, './locales');
+// relative path to '/src/utils'
+const localeDir = path.join(__dirname, localesDirPath);
 const locales = fs.readdirSync(localeDir);
 
-const I18N = locales.reduce((acc, currentDir) => {
+export const I18N = locales.reduce((acc, currentDir) => {
   const poFile = fs.readFileSync(path.join(localeDir, currentDir, 'test.po'), {
     encoding: 'utf-8',
   });
@@ -34,7 +27,3 @@ const I18N = locales.reduce((acc, currentDir) => {
   acc[currentDir] = result;
   return acc;
 }, {});
-
-fs.writeFileSync('test.json', JSON.stringify(I18N));
-
-

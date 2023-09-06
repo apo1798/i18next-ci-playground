@@ -4,7 +4,7 @@ on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -14,7 +14,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-      
+
       - name: Installation
         run: npm i
 
@@ -23,8 +23,7 @@ jobs:
         with:
           search_path: src
           json_diff_file_output: diff.json
-          raw_diff_file_output: diff.txt
-          file_output_only: "true"
+          file_output_only: 'true'
 
       # Print the diff in JSON format
       - name: print json diff
@@ -32,27 +31,7 @@ jobs:
           DIFF: ${{ steps.git-diff-action.outputs.json-diff-path }}
         run: echo ${{ steps.git-diff-action.outputs.json-diff-path }} &&  cat $DIFF
 
-      # Print the diff in raw git format
-      - name: print raw diff
-        env:
-          DIFF: ${{ steps.git-diff-action.outputs.raw-diff-path }}
-        run: cat $DIFF
-
-      - name: run test.js
+      - name: Check whether translation keys are missing
         env:
           JSON-DIFF: ${{ steps.git-diff-action.outputs.json-diff-path }}
-        run: |
-          echo ${{ steps.git-diff-action.outputs.json-diff-path }} 
-          echo 🍍🍍🍍🍍🍍
-          cat $DIFF
-          npm run test:locale
-
-        # steps:
-        #   - name: Set the value
-        #     id: step_one
-        #     run: |
-        #       echo "action_state=yellow" >> "$GITHUB_ENV"
-        #   - name: Use the value
-        #     id: step_two
-        #     run: |
-        #       printf '%s\n' "$action_state" # This will output 'yellow'
+        run: npm run test:locale
