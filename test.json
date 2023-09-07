@@ -6,239 +6,88 @@
       "chunks": [
         {
           "type": "Chunk",
-          "toFileRange": { "start": 1, "lines": 35 },
+          "toFileRange": { "start": 1, "lines": 23 },
           "fromFileRange": { "start": 0, "lines": 0 },
           "changes": [
             {
               "type": "AddedLine",
               "lineAfter": 1,
-              "content": "name: Translation CI Checker"
+              "content": "import { useState } from 'react';"
             },
             {
               "type": "AddedLine",
               "lineAfter": 2,
-              "content": "run-name: Simple JS Script"
+              "content": "import { useTranslation } from 'react-i18next';"
             },
-            { "type": "AddedLine", "lineAfter": 3, "content": "on: [push]" },
-            { "type": "AddedLine", "lineAfter": 4, "content": "jobs:" },
+            { "type": "AddedLine", "lineAfter": 3, "content": "" },
+            {
+              "type": "AddedLine",
+              "lineAfter": 4,
+              "content": "const NewComponent = () => {"
+            },
             {
               "type": "AddedLine",
               "lineAfter": 5,
-              "content": "  Explore-GitHub-Actions:"
+              "content": "  const [messages, setMessages] = useState(0);"
             },
             {
               "type": "AddedLine",
               "lineAfter": 6,
-              "content": "    runs-on: ubuntu-latest"
+              "content": "  const { t } = useTranslation();"
             },
-            { "type": "AddedLine", "lineAfter": 7, "content": "    " },
-            { "type": "AddedLine", "lineAfter": 8, "content": "    steps:" },
-            {
-              "type": "AddedLine",
-              "lineAfter": 9,
-              "content": "      - uses: actions/checkout@v3"
-            },
+            { "type": "AddedLine", "lineAfter": 7, "content": "" },
+            { "type": "AddedLine", "lineAfter": 8, "content": "  return (" },
+            { "type": "AddedLine", "lineAfter": 9, "content": "    <div>" },
             {
               "type": "AddedLine",
               "lineAfter": 10,
-              "content": "        with:"
+              "content": "      <p>{t('main.new_messages', { count: messages })}</p>"
             },
             {
               "type": "AddedLine",
               "lineAfter": 11,
-              "content": "          fetch-depth: 0"
+              "content": "      <p>{t('main.current_date', { date: new Date() })}</p>"
             },
-            { "type": "AddedLine", "lineAfter": 12, "content": "" },
+            { "type": "AddedLine", "lineAfter": 12, "content": "      <p>" },
             {
               "type": "AddedLine",
               "lineAfter": 13,
-              "content": "      - name: Use Node.js"
+              "content": "        {t('main.incoming_message', { from: 'Ann' })}"
             },
             {
               "type": "AddedLine",
               "lineAfter": 14,
-              "content": "        uses: actions/setup-node@v3"
+              "content": "        <br />"
             },
             {
               "type": "AddedLine",
               "lineAfter": 15,
-              "content": "        with:"
+              "content": "        {t('main.message_contents', {"
             },
             {
               "type": "AddedLine",
               "lineAfter": 16,
-              "content": "          node-version: '16.x'"
-            },
-            { "type": "AddedLine", "lineAfter": 17, "content": "" },
-            {
-              "type": "AddedLine",
-              "lineAfter": 18,
-              "content": "      - uses: GrantBirki/git-diff-action@v2.1.0"
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 19,
-              "content": "        id: git-diff-action"
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 20,
-              "content": "        with:"
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 21,
-              "content": "          json_diff_file_output: diff.json"
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 22,
-              "content": "          raw_diff_file_output: diff.txt"
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 23,
-              "content": "          file_output_only: \"true\""
-            },
-            { "type": "AddedLine", "lineAfter": 24, "content": "" },
-            {
-              "type": "AddedLine",
-              "lineAfter": 25,
-              "content": "      # Print the diff in JSON format"
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 26,
-              "content": "      - name: print json diff"
-            },
-            { "type": "AddedLine", "lineAfter": 27, "content": "        env:" },
-            {
-              "type": "AddedLine",
-              "lineAfter": 28,
-              "content": "          DIFF: ${{ steps.git-diff-action.outputs.json-diff-path }}"
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 29,
-              "content": "        run: echo ${{ steps.git-diff-action.outputs.json-diff-path }} &&  cat $DIFF"
-            },
-            { "type": "AddedLine", "lineAfter": 30, "content": "" },
-            {
-              "type": "AddedLine",
-              "lineAfter": 31,
-              "content": "      # Print the diff in raw git format"
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 32,
-              "content": "      - name: print raw diff"
-            },
-            { "type": "AddedLine", "lineAfter": 33, "content": "        env:" },
-            {
-              "type": "AddedLine",
-              "lineAfter": 34,
-              "content": "          DIFF: ${{ steps.git-diff-action.outputs.raw-diff-path }}"
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 35,
-              "content": "        run: cat $DIFF"
-            }
-          ]
-        }
-      ],
-      "path": ".github/workflows/checker.yml"
-    },
-    {
-      "type": "AddedFile",
-      "chunks": [
-        {
-          "type": "Chunk",
-          "toFileRange": { "start": 1, "lines": 18 },
-          "fromFileRange": { "start": 0, "lines": 0 },
-          "changes": [
-            {
-              "type": "AddedLine",
-              "lineAfter": 1,
-              "content": "name: GitHub Actions Demo"
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 2,
-              "content": "run-name: ${{ github.actor }} is testing out GitHub Actions 🚀"
-            },
-            { "type": "AddedLine", "lineAfter": 3, "content": "on: [push]" },
-            { "type": "AddedLine", "lineAfter": 4, "content": "jobs:" },
-            {
-              "type": "AddedLine",
-              "lineAfter": 5,
-              "content": "  Explore-GitHub-Actions:"
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 6,
-              "content": "    runs-on: ubuntu-latest"
-            },
-            { "type": "AddedLine", "lineAfter": 7, "content": "    steps:" },
-            {
-              "type": "AddedLine",
-              "lineAfter": 8,
-              "content": "      - run: echo \"🎉 The job was automatically triggered by a ${{ github.event_name }} event.\""
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 9,
-              "content": "      - run: echo \"🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!\""
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 10,
-              "content": "      - run: echo \"🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}.\""
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 11,
-              "content": "      - name: Check out repository code"
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 12,
-              "content": "        uses: actions/checkout@v3"
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 13,
-              "content": "      - run: echo \"💡 The ${{ github.repository }} repository has been cloned to the runner.\""
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 14,
-              "content": "      - run: echo \"🖥️ The workflow is now ready to test your code on the runner.\""
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 15,
-              "content": "      - name: List files in the repository"
-            },
-            {
-              "type": "AddedLine",
-              "lineAfter": 16,
-              "content": "        run: |"
+              "content": "          body: 'How are you doing?',"
             },
             {
               "type": "AddedLine",
               "lineAfter": 17,
-              "content": "          ls ${{ github.workspace }}"
+              "content": "          context: 'female',"
             },
+            { "type": "AddedLine", "lineAfter": 18, "content": "        })}" },
+            { "type": "AddedLine", "lineAfter": 19, "content": "      </p>" },
+            { "type": "AddedLine", "lineAfter": 20, "content": "    </div>" },
+            { "type": "AddedLine", "lineAfter": 21, "content": "  );" },
+            { "type": "AddedLine", "lineAfter": 22, "content": "};" },
             {
               "type": "AddedLine",
-              "lineAfter": 18,
-              "content": "      - run: echo \"🍏 This job's status is ${{ job.status }}.\""
+              "lineAfter": 23,
+              "content": "export default NewComponent;"
             }
           ]
         }
       ],
-      "path": ".github/workflows/me.yml"
+      "path": "src/components/NewComponent.tsx"
     }
   ]
 }

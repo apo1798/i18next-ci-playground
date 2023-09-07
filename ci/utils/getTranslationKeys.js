@@ -22,6 +22,8 @@ const diffContent = diffObject.files
   .join(' ');
 
 const regExp = regExpPattern;
+console.log('DIFF CONTENT 👊🏼');
+console.log(diffContent);
 
 const matches = Array.from(new Set(diffContent.match(regExp)));
 regExp.lastIndex = 0; // g flag needs to reset lastIndex after every look up
