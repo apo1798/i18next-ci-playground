@@ -3,9 +3,14 @@ export const localesDirPath = '../../locales';
 
 export const excludeTypes = ['DeletedFile', 'DeletedLine'];
 
-// t('translation.key') | I18N['translation.key'] | i18next.t('translation.key') | I18N.translationKey
+// t('translation.key') |
+// I18N['translation.key'] |
+// i18next.t('translation.key') |
+// I18N.translationKey |
+// t('translation.key', {}) -> to 'translation.key'
+//
 export const regExpPattern =
-  /(t\(['|"|`])(.*?)(['|"|`]\))|(I18N\[['|"|`])(.*?)(['|"|`]\])|(i18next\.t\(['|"|`])(.*?)(['|"|`]\))|(I18N\.)(.*?)(?![a-zA-Z0-9])/g;
+  /(t\(['|"|`])(.*?)(['|"|`]\))|(I18N\[['|"|`])(.*?)(['|"|`]\])|(i18next\.t\(['|"|`])(.*?)(['|"|`]\))|(I18N\.)(.*?)(?![a-zA-Z0-9])|(t\(['|"|`])(.*?)(['|"|`](.*?)\))/g;
 
 export const extractInnerInRegex = (test, regex) => {
   const regExpExecArray = regex.exec(test)?.filter(Boolean);
