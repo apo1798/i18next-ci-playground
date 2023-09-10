@@ -5,11 +5,11 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:i18n-json/recommended',
+    // 'plugin:i18n-json/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', , 'eslint-plugin-local-rules'],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
@@ -17,6 +17,6 @@ module.exports = {
     ],
     'no-unused-vars': 'warn',
     '@typescript-eslint/no-unused-vars': 'warn',
-    // 'i18n-json/identical-keys': 2,
+    'local-rules/trans-key-check': 2,
   },
 };

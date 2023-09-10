@@ -26,12 +26,12 @@ jobs:
           file_output_only: 'true'
 
       # Print the diff in JSON format
-      - name: print json diff
-        env:
-          DIFF: ${{ steps.git-diff-action.outputs.json-diff-path }}
-        run: echo ${{ steps.git-diff-action.outputs.json-diff-path }} &&  cat $DIFF
+      # - name: print json diff
+      #   env:
+      #     DIFF: ${{ steps.git-diff-action.outputs.json-diff-path }}
+      #   run: echo ${{ steps.git-diff-action.outputs.json-diff-path }} &&  cat $DIFF
 
-      - name: Check whether translation keys are missing
-        env:
-          JSON-DIFF: ${{ steps.git-diff-action.outputs.json-diff-path }}
-        run: npm run test:locale
+      # - name: Check whether translation keys are missing
+      #   env:
+      #     JSON-DIFF: ${{ steps.git-diff-action.outputs.json-diff-path }}
+      #   run: npm run test:locale

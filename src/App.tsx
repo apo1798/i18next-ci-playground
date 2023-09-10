@@ -1,5 +1,6 @@
 import { Trans, useTranslation } from 'react-i18next';
 import i18next from 'i18next';
+import New2 from '@/components/New2';
 
 i18next.t(`testKey`);
 
@@ -18,12 +19,18 @@ const languages: Readonly<Array<{ language: string; nativeName: string }>> = [
   },
 ] as const;
 
+const I18N = { '^_^': 123 };
+
 function App() {
   const { t, i18n } = useTranslation();
+
+  console.log(I18N['^_^']);
+  console.log(i18next.t('^_^'));
+
   return (
     <>
-      <div>{i18next.t('apple')}</div>
-      <div>{t('apple')}</div>
+      <div>{i18next.t('learn', { subject: i18next.t('subject') })}</div>
+      <div>{t('learn', { subject: 'Vue' })}</div>
       <div>
         {languages.map((option) => (
           <button
@@ -44,6 +51,7 @@ function App() {
       <p>{t('lol')}</p>
       <p>{t('TEST')}</p>
       <p>{t('TEST2')}</p>
+      <New2 />
     </>
   );
 }

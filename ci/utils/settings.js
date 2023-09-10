@@ -11,6 +11,7 @@ export const excludeTypes = ['DeletedFile', 'DeletedLine'];
 //
 export const regExpPattern =
   /(t\(['|"|`])(.*?)(['|"|`]\))|(I18N\[['|"|`])(.*?)(['|"|`]\])|(i18next\.t\(['|"|`])(.*?)(['|"|`]\))|(I18N\.)(.*?)(?![a-zA-Z0-9])|(t\(['|"|`])(.*?)(['|"|`](.*?)\))/g;
+// t\([^)]*\)
 
 export const extractInnerInRegex = (test, regex) => {
   const regExpExecArray = regex.exec(test)?.filter(Boolean);

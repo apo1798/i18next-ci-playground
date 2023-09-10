@@ -4,6 +4,11 @@ msgstr "learn"
 msgid "description"
 msgstr "Edit <1>src/App.js</1> and save to reload"
 
+msgid "subject"
+msgstr "123123123"
+
+msgid "ABCappleDEF123"
+msgstr "123123123"
 ###########
 
 msgid "description.0"

@@ -2,7 +2,6 @@
   "name": "react-i18next-typescript",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -23,7 +22,8 @@
     "i18next-http-backend": "^2.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-i18next": "^13.2.1"
+    "react-i18next": "^13.2.1",
+    "xregexp": "^5.1.1"
   },
   "devDependencies": {
     "@types/node": "^20.5.7",
@@ -31,9 +31,11 @@
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "@typescript-eslint/utils": "^6.6.0",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "eslint": "^8.45.0",
     "eslint-plugin-i18n-json": "^4.0.0",
+    "eslint-plugin-local-rules": "^2.0.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "typescript": "^5.0.2",

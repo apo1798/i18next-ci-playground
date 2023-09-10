@@ -23,6 +23,12 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "types.d.ts"],
+  "include": [
+    "src",
+    "eslint-local-rules",
+    "types.d.ts",
+    "ci",
+    "eslint-local-rules/customRule.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

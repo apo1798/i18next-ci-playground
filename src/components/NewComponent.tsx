@@ -8,7 +8,7 @@ const NewComponent = () => {
   return (
     <div>
       <p>{t('main.new_messages', { count: messages })}</p>
-      <p>{t('main.current_date', { date: new Date() })}</p>
+      <p>{t('main.current_date', { date: t('main.current_date') })}</p>
       <p>
         {t('main.incoming_message', { from: 'Ann' })}
         <br />
