@@ -4,12 +4,14 @@ const apple = '^_^';
 const wtfIsThis = `learn2`;
 const learn = '123';
 
-console.log(`ABC${123}DEF`);
+// console.log(`ABC${123}DEF`);
+console.log(i18next.t(['learn', '3123', 'ABCappleDEF123']));
 
-const I18N = { '^_^': 123, subject: '132', iasdasdasdasd: '123' };
+// const I18N = { '^_^': 123, subject: '132', iasdasdasdasd: '123' };
 
 function New2() {
   const { t } = useTranslation();
+  console.log(t(['learn', 'description.0', 'description.0']));
 
   console.log(t(wtfIsThis));
   console.log(t(`learn`));
@@ -17,7 +19,6 @@ function New2() {
   console.log(t(learn));
   console.log(t('subject'));
   console.log(I18N.iasdasdasdasd);
-  console.log(I18N['subject']);
   console.log(I18N[apple]);
 
   return (

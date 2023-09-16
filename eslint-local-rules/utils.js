@@ -851,11 +851,17 @@ const inconsistentI18NKeys = {
     'editor CreateTemplate dropdown Basic',
 };
 
-const getI18NObject = (localeDir) => {
+/**
+ * A util function to generate an object containing all entries of languages and their correspoding key value pairs
+ * @param {string} localeDir the relative path to your po files e.g. `path.join(__dirname, '../locales')`
+ * @param {string} poFileName po file name (including the extension) e.g. `test.po`
+ * @returns {Record<string, Record<string, string>>} a collection of your translation
+ */
+const getI18NObject = (localeDir, poFileName) => {
   const locales = fs.readdirSync(localeDir);
   return locales.reduce((acc, currentDir) => {
     const poFile = fs.readFileSync(
-      path.join(localeDir, currentDir, 'test.po'),
+      path.join(localeDir, currentDir, poFileName),
       {
         encoding: 'utf-8',
       }
@@ -880,24 +886,42 @@ const getI18NObject = (localeDir) => {
   }, {});
 };
 
-// missing key check
-const getMissingLangs = (transKey, languages, I18NObject) => {
-  if (!transKey) return [];
-  let missingLangs = [];
+/**
+ * A util function to look up whether (1) the trnaslation key exists in the language (2) the corresponding value is not empty (string)
+ * @param {(string)[]} transKeys the translation key you'd like to look up
+ * @param {string[]} languages an array including all the language entries
+ * @param {Record<string, Record<string, string>} I18NObject the returned value of `getI18NObject`
+ * @returns {Record<string,string[]>} an array listing all missing languages
+ */
+const getMissingLangs = (transKeys, languages, I18NObject) => {
+  if (transKeys === 0) return {};
 
-  languages.forEach((language) => {
-    if (
-      I18NObject[language][transKey] === '' ||
-      !I18NObject[language][transKey]
-    ) {
-      missingLangs.push(language);
+  return transKeys.reduce((acc, key) => {
+    const missingLanguages = languages.reduce((acc, language) => {
+      if (
+        !(key in I18NObject[language]) ||
+        I18NObject[language][key] === '' ||
+        !I18NObject[language][key]
+      ) {
+        acc.push(language);
+      }
+
+      return acc;
+    }, []);
+
+    if (missingLanguages.length !== 0) {
+      acc[key] = missingLanguages;
     }
-  });
-
-  return missingLangs;
+    return acc;
+  }, {});
 };
 
-// help digest tempalte literal and get the final output
+/**
+ * A helper function to digest template lieteral node and get the final output
+ * @param {TemplateElement[]} quasis quasis property in ast
+ * @param {Expression[]} expressions expression property in ast
+ * @returns {string} the calculated value of tempalte literal
+ */
 const getTemplateStringValue = (quasis, expressions) => {
   return quasis
     .map((item, i) => {
@@ -911,26 +935,57 @@ const getTemplateStringValue = (quasis, expressions) => {
     .join('');
 };
 
-const getTransKey = (argument0) => {
-  try {
-    const type = argument0?.type;
-    const parent = argument0?.parent;
+/**
+ *
+ * @param {CallExpressionArgument} argument0 the first argument of node (node.arguments[0])
+ * @returns {string[]} the extracted keys
+ */
+const getTransKeys = (argument0) => {
+  const _getTransKeys = () => {
+    try {
+      const type = argument0?.type;
+      const parent = argument0?.parent;
 
-    if (type === 'TemplateLiteral') {
-      return getTemplateStringValue(argument0.quasis, argument0.expressions);
+      if (type === 'TemplateLiteral') {
+        const value = getTemplateStringValue(
+          argument0.quasis,
+          argument0.expressions
+        );
+        return [value];
+      }
+
+      if (type === 'ArrayExpression') {
+        const keys = argument0.elements.map((element) => {
+          if (element.type === 'TemplateElement') {
+            return getTemplateStringValue(element.quasis, element.expressions);
+          }
+          if (element.type === 'Literal') {
+            return element.value;
+          }
+        });
+        return keys;
+      }
+
+      if (type === 'Identifier' && parent?.object?.name === 'I18N') {
+        return [argument0.name];
+      } else {
+        return [argument0.value];
+      }
+    } catch (e) {
+      console.log(e);
+      return [];
     }
-    if (type === 'Identifier' && parent?.object?.name === 'I18N') {
-      return argument0.name;
-    } else {
-      return argument0.value;
-    }
-  } catch (e) {
-    console.log(e);
-    return undefined;
-  }
+  };
+
+  return _getTransKeys().filter(Boolean);
 };
 
 // generate error message
+/**
+ * Log out the error message in ESLint console
+ * @param {Error | any} error error object or anything
+ * @param {string} filename the filename where this function is working on
+ */
 const logErrorMessage = (error, filename = '') => {
   console.log(`🔴🔴🔴 Error occured in ${filename}`);
   if (error instanceof Error) {
@@ -945,7 +1000,7 @@ const logErrorMessage = (error, filename = '') => {
 // eslint-disable-next-line no-undef
 module.exports = {
   getI18NObject,
-  getTransKey,
+  getTransKeys,
   getMissingLangs,
   logErrorMessage,
 };

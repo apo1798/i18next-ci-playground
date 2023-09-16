@@ -22,9 +22,10 @@ const myRule: TSESLint.RuleModule<MessageIds> = {
     return {
       CallExpression(node) {
         // context.getDeclaredVariables(node);
-        // if (node.callee.type !== AST_NODE_TYPES.Identifier) return;
+        if (node.callee.type !== AST_NODE_TYPES.Identifier) return;
 
         if (node.callee.name === 'getPayments') {
+          // const as = node.arguments[0]
           context.report({
             node: node,
             messageId: 'messageIdForSomeFailure',
@@ -42,6 +43,9 @@ const myRule: TSESLint.RuleModule<MessageIds> = {
           checkAndMakeWarning(node, missingLangs);
         }
       },
+      ExpressionStatement(node) {
+        if (node.type )
+      }
     };
   },
 };
