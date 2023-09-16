@@ -855,7 +855,7 @@ const getI18NObject = (localeDir) => {
   const locales = fs.readdirSync(localeDir);
   return locales.reduce((acc, currentDir) => {
     const poFile = fs.readFileSync(
-      path.join(localeDir, currentDir, 'LC_MESSAGES/django.po'),
+      path.join(localeDir, currentDir, 'test.po'),
       {
         encoding: 'utf-8',
       }

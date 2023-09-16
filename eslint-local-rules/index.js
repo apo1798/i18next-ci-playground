@@ -1,25 +1,22 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 'use strict';
 
-// eslint-disable-next-line no-undef
 const path = require('path');
+const utils = require('eslint-utils');
 
 const {
   getI18NObject,
   getTransKey,
   getMissingLangs,
   logErrorMessage,
-  // eslint-disable-next-line no-undef
 } = require('./utils');
 
 // relative path from current file
-
-// eslint-disable-next-line no-undef
-const localeDir = path.join(__dirname, '../../../locale');
+const localeDir = path.join(__dirname, '../locales');
 const I18NObject = getI18NObject(localeDir);
 const languages = Object.keys(I18NObject);
 
 // eslint rule definition
-// eslint-disable-next-line no-undef
 module.exports = {
   'trans-key-check': {
     defaultOptions: [],
@@ -43,6 +40,18 @@ module.exports = {
       return {
         CallExpression(node) {
           try {
+            if (context.filename.includes('New2.tsx')) {
+              console.log('--');
+              console.log(context.getDeclaredVariables(node));
+
+              console.log(context.getTokenByRangeStart(node));
+
+              // console.log(utils.getStaticValue(node));
+              // const sourceCode = context.getSourceCode();
+
+              // console.log(sourceCode);
+            }
+
             if ('callee' in node && node.callee.name === 't') {
               const transKey = getTransKey(node.arguments?.[0]);
               const missingLangs = getMissingLangs(
